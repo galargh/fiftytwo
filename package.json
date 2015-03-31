@@ -1,0 +1,22 @@
+{
+  "name": "fiftytwo",
+  "version": "0.0.1",
+  "description": "HTML5 Guitar Tuner",
+  "main": "",
+  "scripts": {
+    "env": "env",
+    "clean": "rm -r build/ && mkdir build/",
+    "build:js": "browserify -t reactify -e assets/scripts/main.js -o build/bundle.js",
+    "build:css": "cp assets/styles/main.css build/bundle.css",
+    "build": "npm run clean && npm run build:js && npm run build:css"
+  },
+  "author": "Piotr Galar",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^0.13.1"
+  },
+  "devDependencies": {
+    "browserify": "^9.0.3",
+    "reactify": "^1.1.0"
+  }
+}
