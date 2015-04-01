@@ -5,10 +5,15 @@ var React 	   = require('react'),
 	Difference = require('./difference.js'),
 	Help	   = require('./helpers.js');
 
+var setUpStream   = require('./webaudio.js'),
+    estimatePitch = require('./mpm.js');
+
 var octaveCutoffs = Help.octaveCutoffs,
 	noteFrequencies = Help.noteFrequencies,
 	notes = Help.notes,
 	getBackgroundColor = Help.getBackgroundColor;
+
+var pitches = [];
 
 module.exports = React.createClass({
 	getInitialState: function() {
@@ -17,12 +22,28 @@ module.exports = React.createClass({
 		};
 	},
 	componentDidMount: function() {
-    	setInterval(this.incrementFrequency, 1000);
+        var self = this;
+        navigator.getUserMedia({audio: true},
+            function(stream) {
+                var set = setUpStream(stream);
+                set.script.onaudioprocess = function(audioProcessingEvent) {
+                    var audioBuffer = audioProcessingEvent.inputBuffer.getChannelData(0);
+                    var pitch = estimatePitch(audioBuffer, set.context.sampleRate, 0.75, 0.97, 80);
+                    self.setPitch(pitch.pitch);
+                }
+            }, function(error) {
+                console.log(error);
+            }
+        );
     },
-    incrementFrequency: function() {
-    	this.setState({
-    		frequency: this.state.frequency + 1
-    	});
+    setPitch: function(pitch) {
+        pitches.push(pitch);
+        if (pitches.length == 5) {
+            this.setState({
+                frequency: pitches.sort()[2]
+            });
+            pitches = [];
+        }
     },
     getNote: function() {
     	var multiplier = 1;
@@ -71,7 +92,7 @@ module.exports = React.createClass({
     	var note = this.getNote();
     	return (
     		<div style={getBackgroundColor(note.difference)} className="full relative">
-    			<Frequency frequency={this.state.frequency} />
+    			<Frequency frequency={this.state.frequency.toFixed(3)} />
     			<Difference difference={note.difference} />
     			<Note note={note.note} octave={note.octave} />
     		</div>

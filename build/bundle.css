@@ -1,0 +1,48 @@
+body {
+	font-family: Verdana, Geneva, sans-serif;
+	color: #202020;
+}
+.topLeft {
+	top: 0;
+	left: 0;
+}
+
+.topRight {
+	top: 0;
+	right: 0;
+}
+
+.center {
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+}
+
+.full {
+	height: 100%;
+	width: 100%;
+}
+
+.relative {
+	position: relative;
+}
+
+.absolute {
+	position: absolute;
+}
+
+h1 {
+	font-size: 200px;
+}
+
+h2, small {
+	font-size: 50px;
+}
+
+.noMargin {
+	margin: 0;
+}
+
+.withMargin {
+	margin: 20px;
+}
