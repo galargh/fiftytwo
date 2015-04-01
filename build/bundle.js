@@ -419,7 +419,6 @@ function chainConnect() {
 
 module.exports = function(stream) {
 	var context = new AudioContext();
-	console.log(context.destination);
 	var mic = context.createMediaStreamSource(stream);
 	var script = context.createScriptProcessor(1024, 1, 1);
 	var gain = context.createGain();
