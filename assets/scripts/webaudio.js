@@ -19,8 +19,9 @@ module.exports = function(stream) {
 	var context = new AudioContext();
 	var mic = context.createMediaStreamSource(stream);
 	var script = context.createScriptProcessor(1024, 1, 1);
-	var analyser = context.createAnalyser();
-	chainConnect(mic, script, analyser);
+	var gain = context.createGain();
+	gain.gain.value = 0;
+	chainConnect(mic, script, gain, context.destination);
 	return {
 		context: context,
 		script: script

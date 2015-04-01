@@ -310,6 +310,7 @@ var octaveCutoffs = Help.octaveCutoffs,
 	getBackgroundColor = Help.getBackgroundColor;
 
 var pitches = [];
+var script;
 
 module.exports = React.createClass({displayName: "exports",
 	getInitialState: function() {
@@ -322,6 +323,7 @@ module.exports = React.createClass({displayName: "exports",
         navigator.getUserMedia({audio: true},
             function(stream) {
                 var set = setUpStream(stream);
+                script = set.script;
                 set.script.onaudioprocess = function(audioProcessingEvent) {
                     var audioBuffer = audioProcessingEvent.inputBuffer.getChannelData(0);
                     var pitch = estimatePitch(audioBuffer, set.context.sampleRate, 0.75, 0.97, 80);
@@ -409,39 +411,6 @@ navigator.getUserMedia = navigator.getUserMedia ||
 					     navigator.mozGetUserMedia ||
 					     navigator.msGetUserMedia;
 
-function getAnalyser(context) {
-	var analyser = context.createAnalyser();
-	try {
-		analyser.fftSize = 32768;
-	} catch(error) {
-		analyser.fftSize = 2048;
-	}
-	analyser.smoothingTimeConstant = 0.8;
-	return analyser;
-}
-
-function getGain(context) {
-	var gain = context.createGain();
-	gain.gain.value = 1.5;
-	return gain;
-}
-
-function getPass(context, type, frequency) {
-	var pass = context.createBiquadFilter();
-	pass.Q.value = 0;
-	pass.frequency.value = frequency;
-	pass.type = type;
-	return pass;
-}
-
-function getLowPass(context) {
-	return getPass(context, "lowpass", 4200);
-}
-
-function getHighPass(context) {
-	return getPass(context, "highpass", 30);
-}
-
 function chainConnect() {
 	for(var i = 0; i < arguments.length - 1; i++) {
 		arguments[i].connect(arguments[i+1]);
@@ -450,15 +419,17 @@ function chainConnect() {
 
 module.exports = function(stream) {
 	var context = new AudioContext();
+	console.log(context.destination);
 	var mic = context.createMediaStreamSource(stream);
 	var script = context.createScriptProcessor(1024, 1, 1);
-	var analyser = context.createAnalyser();
-	chainConnect(mic, script, analyser);
+	var gain = context.createGain();
+	gain.gain.value = 0;
+	chainConnect(mic, script, gain, context.destination);
 	return {
 		context: context,
 		script: script
 	};
-}
+};
 
 
 },{}],9:[function(require,module,exports){

@@ -14,6 +14,7 @@ var octaveCutoffs = Help.octaveCutoffs,
 	getBackgroundColor = Help.getBackgroundColor;
 
 var pitches = [];
+var script;
 
 module.exports = React.createClass({
 	getInitialState: function() {
@@ -26,6 +27,7 @@ module.exports = React.createClass({
         navigator.getUserMedia({audio: true},
             function(stream) {
                 var set = setUpStream(stream);
+                script = set.script;
                 set.script.onaudioprocess = function(audioProcessingEvent) {
                     var audioBuffer = audioProcessingEvent.inputBuffer.getChannelData(0);
                     var pitch = estimatePitch(audioBuffer, set.context.sampleRate, 0.75, 0.97, 80);
