@@ -1,16 +1,13 @@
 # fiftytwo[52]
 
-Fiftytwo is a tuner using WebAudio API for audio manipulation. It implements
-Philip McLeod's MPM algorithm for pitch detection. It is being used and tested
-mainly with guitar and ukulele.
+Fiftytwo is a tuner using WebAudio API for audio manipulation and ReactJS for
+the view. It implements Philip McLeod's MPM algorithm for pitch
+detection. It is being used and tested mainly with guitar and ukulele.
 
 ### 52
 The tuner was named after
 ['the world's loneliest whale'](http://en.wikipedia.org/wiki/52-hertz_whale)
 which calls at a very unusual frequency of 52Hz.
-
-### ReactJS
-React was used in this project solely for learning purposes.
 
 ### MPM
 Special thanks to Philip McLeod for
