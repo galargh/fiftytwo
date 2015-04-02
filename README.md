@@ -17,7 +17,7 @@ Special thanks to Philip McLeod for
 [a smarter way to detect pitch](http://miracle.otago.ac.nz/tartini/papers/A_Smarter_Way_to_Find_Pitch.pdf).
 
 ### TODO
-*use FFT to speed up the pitch detection
-*tune config(cutoffs etc.) for more acurate results
-*allow in-browser config manipulation
-*add info box for denied microphone access
+* use FFT to speed up the pitch detection
+* tune config(cutoffs etc.) for more acurate results
+* allow in-browser config manipulation
+* add info box for denied microphone access
