@@ -46,3 +46,21 @@ h2, small {
 .withMargin {
 	margin: 20px;
 }
+
+@media only screen and (max-width: 750px) {
+	h2 {
+		font-size: 40px;
+	}
+}
+
+@media only screen and (max-width: 650px) {
+	h2 {
+		font-size: 30px;
+	}
+}
+
+@media only screen and (max-width: 500px) {
+	h2 {
+		font-size: 20px;
+	}
+}
