@@ -1,4 +1,4 @@
-# fiftytwo[52]
+# fiftytwo[[52](http://piotrgalar.com/fiftytwo)]
 
 Fiftytwo is a tuner using WebAudio API for audio manipulation and ReactJS for
 the view. It implements Philip McLeod's MPM algorithm for pitch
