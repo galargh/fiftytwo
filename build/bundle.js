@@ -3,68 +3,70 @@
 var React = require('react');
 
 module.exports = React.createClass({displayName: "exports",
-	render: function() {
-		var difference = this.props.difference.toFixed(3);
-		if (difference > 0) {
-			difference = '+' + difference;
-		}
-		return (
-			React.createElement("h2", {className: "topRight absolute withMargin"}, 
-				difference, " cent"
-			)
-		);
-	}
+    render: function() {
+        var difference = this.props.difference.toFixed(3);
+        if (difference > 0) {
+            difference = '+' + difference;
+        }
+        return (
+            React.createElement("h2", {className: "topRight absolute withMargin"}, 
+                difference, " cent"
+            )
+        );
+    }
 });
+
 
 },{"react":164}],2:[function(require,module,exports){
 /** @jsx React.DOM */
 var React = require('react');
 
 module.exports = React.createClass({displayName: "exports",
-	render: function() {
-		return (
-			React.createElement("h2", {className: "topLeft absolute withMargin"}, 
-				this.props.frequency, " Hz"
-			)
-		);
-	}
+    render: function() {
+        return (
+            React.createElement("h2", {className: "topLeft absolute withMargin"}, 
+                this.props.frequency, " Hz"
+            )
+        );
+    }
 });
+
 
 },{"react":164}],3:[function(require,module,exports){
 function RGB(r, g, b) {
-	this.r = r;
-	this.g = g;
-	this.b = b;
+    this.r = r;
+    this.g = g;
+    this.b = b;
 }
 
 RGB.prototype.toHEX = function() {
-	function getHEX(n) {
-		v = n.toString(16);
-		if (v.length == 1) {
-			return '0' + v;
-		}
-		return v;
-	}
-	return '#' + getHEX(this.r) + getHEX(this.g) + getHEX(this.b);
+    function getHEX(n) {
+        v = n.toString(16);
+        if (v.length == 1) {
+            return '0' + v;
+        }
+        return v;
+    }
+    return '#' + getHEX(this.r) + getHEX(this.g) + getHEX(this.b);
 };
 
 function ColorSlide(fromRGB, toRGB) {
-	this.from = fromRGB;
-	this.to = toRGB;
+    this.from = fromRGB;
+    this.to = toRGB;
 }
 
 ColorSlide.prototype.get = function(step, nOfSteps) {
-	if (step <= 0) {
-		return this.from;
-	}
-	if (step >= nOfSteps) {
-		return this.to;
-	}
-	var f = (step / nOfSteps);
-	var r = this.from.r + f * (this.to.r - this.from.r);
-	var g = this.from.g + f * (this.to.g - this.from.g);
-	var b = this.from.b + f * (this.to.b - this.from.b);
-	return (new RGB(Math.floor(r), Math.floor(g), Math.floor(b)));
+    if (step <= 0) {
+        return this.from;
+    }
+    if (step >= nOfSteps) {
+        return this.to;
+    }
+    var f = (step / nOfSteps);
+    var r = this.from.r + f * (this.to.r - this.from.r);
+    var g = this.from.g + f * (this.to.g - this.from.g);
+    var b = this.from.b + f * (this.to.b - this.from.b);
+    return (new RGB(Math.floor(r), Math.floor(g), Math.floor(b)));
 };
 
 var blue = new RGB(0, 90, 200);
@@ -75,205 +77,210 @@ var greenToBlue = new ColorSlide(green, blue);
 var greenToRed = new ColorSlide(green, red);
 
 function getBackgroundColor(diff) {
-	diff = (diff*10).toFixed();
-	if (diff < 0) {
-		return {
-			backgroundColor: greenToBlue.get(-diff, 100).toHEX()
-		};
-	}
-	return {
-		backgroundColor: greenToRed.get(diff, 100).toHEX()
-	};
+    diff = (diff*10).toFixed();
+    if (diff < 0) {
+        return {
+            backgroundColor: greenToBlue.get(-diff, 100).toHEX()
+        };
+    }
+    return {
+        backgroundColor: greenToRed.get(diff, 100).toHEX()
+    };
 }
 
 var noteFrequencies = [
-	16.352,
-	17.324,
-	18.354,
-	19.445,
-	20.602,
-	21.827,
-	23.125,
-	24.500,
-	25.957,
-	27.500,
-	29.135,
-	30.868
+    16.352,
+    17.324,
+    18.354,
+    19.445,
+    20.602,
+    21.827,
+    23.125,
+    24.500,
+    25.957,
+    27.500,
+    29.135,
+    30.868
 ];
 var notes = [
-	"C",
-	"C#",
-	"D",
-	"D#",
-	"E",
-	"F",
-	"F#",
-	"G",
-	"G#",
-	"A",
-	"A#",
-	"B"
+    "C",
+    "C#",
+    "D",
+    "D#",
+    "E",
+    "F",
+    "F#",
+    "G",
+    "G#",
+    "A",
+    "A#",
+    "B"
 ];
 var octaveCutoffs = [
-	0.0,
-	31.7855,
-	63.5705,
-	127.14,
-	254.285,
-	508.565,
-	1017.135,
-	2034.25,
-	4068.55,
-	8137.05,
-	16274.15,
-	32548.25
+    0.0,
+    31.7855,
+    63.5705,
+    127.14,
+    254.285,
+    508.565,
+    1017.135,
+    2034.25,
+    4068.55,
+    8137.05,
+    16274.15,
+    32548.25
 ];
 
 module.exports = {
-	octaveCutoffs: octaveCutoffs,
-	notes: notes,
-	noteFrequencies: noteFrequencies,
-	getBackgroundColor: getBackgroundColor
+    octaveCutoffs: octaveCutoffs,
+    notes: notes,
+    noteFrequencies: noteFrequencies,
+    getBackgroundColor: getBackgroundColor
 };
 
 
 },{}],4:[function(require,module,exports){
 /** @jsx React.DOM */
 var React = require('react'),
-	Tuner = require('./tuner.js');
+    Tuner = require('./tuner.js');
 
 React.render(
-	React.createElement(Tuner, null), 
+    React.createElement(Tuner, null),
     document.getElementById('tuner')
 );
 
 
 },{"./tuner.js":7,"react":164}],5:[function(require,module,exports){
 function getNSDF(audioBuffer) {
-	var nsdf = [];
-	for (var tau = 0; tau < audioBuffer.length; tau ++) {
-		var acf = 0.0,
-			m = 0.0;
-		for (var i = 0; i < audioBuffer.length - tau; i++) {
-			acf += audioBuffer[i] * audioBuffer[i + tau];
-			m += audioBuffer[i] * audioBuffer[i] + audioBuffer[i + tau] * audioBuffer[i + tau];
-		}
-		nsdf.push(2 * acf / m);
-	}
-	return nsdf;
+    var nsdf = [];
+    for (var tau = 0; tau < audioBuffer.length; tau ++) {
+        var acf = 0.0,
+            m = 0.0;
+        for (var i = 0; i < audioBuffer.length - tau; i++) {
+            acf += audioBuffer[i] * audioBuffer[i + tau];
+            m += audioBuffer[i] * audioBuffer[i] +
+                audioBuffer[i + tau] * audioBuffer[i + tau];
+        }
+        nsdf.push(2 * acf / m);
+    }
+    return nsdf;
 }
 
 function getMaxPositions(nsdf) {
-	var pos = 0,
-		maxPos = 0;
+    var pos = 0,
+        maxPos = 0;
 
-	var maxPositions = [];
+    var maxPositions = [];
 
-	while(pos < (nsdf.length - 1) / 3 && nsdf[pos] > 0.0) {
-		pos++;
-	}
+    while(pos < (nsdf.length - 1) / 3 && nsdf[pos] > 0.0) {
+        pos++;
+    }
 
-	while(pos < nsdf.length - 1 && nsdf[pos] <= 0.0) {
-		pos++;
-	}
+    while(pos < nsdf.length - 1 && nsdf[pos] <= 0.0) {
+        pos++;
+    }
 
-	if (pos == 0) {
-		pos = 1;
-	}
+    if (pos == 0) {
+        pos = 1;
+    }
 
-	while(pos < nsdf.length - 1) {
-		//ndsf[pos] >= 0.0
-		if (nsdf[pos] > nsdf[pos - 1] && nsdf[pos] && nsdf[pos] >= nsdf[pos + 1]) {
-			if (maxPos == 0 || nsdf[pos] > nsdf[maxPos]) {
-				maxPos = pos;
-			}
-		}
-		pos++;
-		if (pos < nsdf.length - 1 && nsdf[pos] <= 0.0) {
-			if (maxPos > 0) {
-				maxPositions.push(maxPos);
-				maxPos = 0;
-			}
-			while (pos < nsdf.length - 1 && nsdf[pos] <= 0.0) {
-				pos++;
-			}
-		}
-	}
+    while(pos < nsdf.length - 1) {
+        //ndsf[pos] >= 0.0
+        if (nsdf[pos] > nsdf[pos - 1] && nsdf[pos] &&
+            nsdf[pos] >= nsdf[pos + 1]) {
 
-	if (maxPos > 0) {
-		maxPositions.push(maxPos);
-	}
+            if (maxPos == 0 || nsdf[pos] > nsdf[maxPos]) {
+                maxPos = pos;
+            }
+        }
+        pos++;
+        if (pos < nsdf.length - 1 && nsdf[pos] <= 0.0) {
+            if (maxPos > 0) {
+                maxPositions.push(maxPos);
+                maxPos = 0;
+            }
+            while (pos < nsdf.length - 1 && nsdf[pos] <= 0.0) {
+                pos++;
+            }
+        }
+    }
 
-	return maxPositions;
+    if (maxPos > 0) {
+        maxPositions.push(maxPos);
+    }
+
+    return maxPositions;
 }
 
 function getTurningPoint(nsdf, tau) {
-	if (bottom == 0.0) {
-		return {
-			x: tau,
-			y: nsdf[tau],
-		}
-	}
-	var delta = nsdf[tau - 1] - nsdf[tau + 1],
-		bottom = 2 * (nsdf[tau + 1] + nsdf[tau - 1] - 2 * nsdf[tau]);
-	return {
-		x: tau + delta / bottom,
-		y: nsdf[tau] - delta * delta / (4 * bottom)
-	};
+    if (bottom == 0.0) {
+        return {
+            x: tau,
+            y: nsdf[tau],
+        }
+    }
+    var delta = nsdf[tau - 1] - nsdf[tau + 1],
+        bottom = 2 * (nsdf[tau + 1] + nsdf[tau - 1] - 2 * nsdf[tau]);
+    return {
+        x: tau + delta / bottom,
+        y: nsdf[tau] - delta * delta / (4 * bottom)
+    };
 }
 
-module.exports = function(audioBuffer, sampleRate, smallCutoff, cutoff, lowerPitchCutoff) {
-	var pitch = 0.0;
-	var maxPositions = [],
-	    estimates = [];
+module.exports = function(audioBuffer, sampleRate, smallCutoff, cutoff,
+    lowerPitchCutoff) {
 
-	var nsdf = getNSDF(audioBuffer);
-	var maxPositions = getMaxPositions(nsdf);
+    var pitch = 0.0;
+    var maxPositions = [],
+        estimates = [];
 
-	var highestAmp = Number.MIN_VALUE;
+    var nsdf = getNSDF(audioBuffer);
+    var maxPositions = getMaxPositions(nsdf);
 
-	for (var i = 0; i < maxPositions.length; i++) {
-		var tau = maxPositions[i];
+    var highestAmp = Number.MIN_VALUE;
 
-		highestAmp = Math.max(highestAmp, nsdf[tau]);
+    for (var i = 0; i < maxPositions.length; i++) {
+        var tau = maxPositions[i];
 
-		if (nsdf[tau] > smallCutoff) {
-			var turningPoint = getTurningPoint(nsdf, tau);
-			estimates.push(turningPoint);
-			highestAmp = Math.max(highestAmp, turningPoint.y);
-		}
-	}
+        highestAmp = Math.max(highestAmp, nsdf[tau]);
 
-	if (estimates.length == 0) {
-		return {
-			pitch: 0.0,
-			probability: 0.0
-		};
-	}
-	var actualCutoff = cutoff * highestAmp;
+        if (nsdf[tau] > smallCutoff) {
+            var turningPoint = getTurningPoint(nsdf, tau);
+            estimates.push(turningPoint);
+            highestAmp = Math.max(highestAmp, turningPoint.y);
+        }
+    }
 
-	var period = 0;
-	for (var i = 0; i < estimates.length; i++) {
-		if (estimates[i].y >= actualCutoff) {
-			period = estimates[i].x;
-			break;
-		}
-	}
+    if (estimates.length == 0) {
+        return {
+            pitch: 0.0,
+            probability: 0.0
+        };
+    }
+    var actualCutoff = cutoff * highestAmp;
 
-	var pitchEstimate = sampleRate / period;
-	if (pitchEstimate > lowerPitchCutoff) {
-		pitch = pitchEstimate;
-	} else {
-		return {
-			pitch: 0.0,
-			probability: 0.0
-		};
-	}
+    var period = 0;
+    for (var i = 0; i < estimates.length; i++) {
+        if (estimates[i].y >= actualCutoff) {
+            period = estimates[i].x;
+            break;
+        }
+    }
 
-	return {
-		pitch: pitch,
-		probability: highestAmp
-	}
+    var pitchEstimate = sampleRate / period;
+    if (pitchEstimate > lowerPitchCutoff) {
+        pitch = pitchEstimate;
+    } else {
+        return {
+            pitch: 0.0,
+            probability: 0.0
+        };
+    }
+
+    return {
+        pitch: pitch,
+        probability: highestAmp
+    }
 
 }
 
@@ -283,50 +290,53 @@ module.exports = function(audioBuffer, sampleRate, smallCutoff, cutoff, lowerPit
 var React = require('react');
 
 module.exports = React.createClass({displayName: "exports",
-	render: function() {
-		return (
-			React.createElement("h1", {className: "center absolute noMargin"}, 
-				React.createElement("span", null, this.props.note), 
-				React.createElement("small", null, this.props.octave)
-	    	)
-		);
-	}
+    render: function() {
+        return (
+            React.createElement("h1", {className: "center absolute noMargin"}, 
+                React.createElement("span", null, this.props.note), 
+                React.createElement("small", null, this.props.octave)
+            )
+        );
+    }
 });
+
 
 },{"react":164}],7:[function(require,module,exports){
 /** @jsx React.DOM */
-var React 	   = require('react'),
-	Frequency  = require('./frequency.js'),
-	Note	   = require('./note.js'),
-	Difference = require('./difference.js'),
-	Help	   = require('./helpers.js');
+var React      = require('react'),
+    Frequency  = require('./frequency.js'),
+    Note       = require('./note.js'),
+    Difference = require('./difference.js'),
+    Help       = require('./helpers.js');
 
 var setUpStream   = require('./webaudio.js'),
     estimatePitch = require('./mpm.js');
 
 var octaveCutoffs = Help.octaveCutoffs,
-	noteFrequencies = Help.noteFrequencies,
-	notes = Help.notes,
-	getBackgroundColor = Help.getBackgroundColor;
+    noteFrequencies = Help.noteFrequencies,
+    notes = Help.notes,
+    getBackgroundColor = Help.getBackgroundColor;
 
 var pitches = [];
 var script;
 
 module.exports = React.createClass({displayName: "exports",
-	getInitialState: function() {
-		return {
-			frequency: 0
-		};
-	},
-	componentDidMount: function() {
+    getInitialState: function() {
+        return {
+            frequency: 0
+        };
+    },
+    componentDidMount: function() {
         var self = this;
         navigator.getUserMedia({audio: true},
             function(stream) {
                 var set = setUpStream(stream);
                 script = set.script;
                 set.script.onaudioprocess = function(audioProcessingEvent) {
-                    var audioBuffer = audioProcessingEvent.inputBuffer.getChannelData(0);
-                    var pitch = estimatePitch(audioBuffer, set.context.sampleRate, 0.75, 0.97, 80);
+                    var audioBuffer = audioProcessingEvent.inputBuffer
+                        .getChannelData(0);
+                    var pitch = estimatePitch(audioBuffer,
+                        set.context.sampleRate, 0.75, 0.97, 80);
                     self.setPitch(pitch.pitch);
                 }
             }, function(error) {
@@ -344,90 +354,100 @@ module.exports = React.createClass({displayName: "exports",
         }
     },
     getNote: function() {
-    	var multiplier = 1;
-    	var octave = 0;
-    	while (octave < octaveCutoffs.length && this.state.frequency >= octaveCutoffs[octave]) {
-    		octave++;
-    		multiplier *= 2;
-    	}
-    	octave--;
-    	multiplier /= 2;
-    	var i = 0;
-    	while (i < noteFrequencies.length && this.state.frequency > noteFrequencies[i] * multiplier) {
-    		i++;
-    	}
-    	if (i === 0) {
-    		return {
-    			note: notes[0],
-    			octave: octave,
-    			difference: this.state.frequency - noteFrequencies[0] * multiplier
-    		};
-    	} else if(i === noteFrequencies.length) {
-    		return {
-    		note: notes[notes.length - 1],
-    			octave: octave,
-    			difference: this.state.frequency - noteFrequencies[noteFrequencies.length - 1] * multiplier
-    		};
-    	} else {
-    		var toLower = this.state.frequency - noteFrequencies[i - 1] * multiplier;
-    		var toHigher = this.state.frequency - noteFrequencies[i] * multiplier;
-    		if (toLower < -toHigher) {
-    			return {
-    				note: notes[i - 1],
-    				octave: octave,
-   					difference: toLower
-    			};
-    		} else {
-    			return {
-    				note: notes[i],
-    				octave: octave,
-    				difference: toHigher
-    			};
-    		}
-    	}
+        var multiplier = 1;
+        var octave = 0;
+        while (octave < octaveCutoffs.length &&
+            this.state.frequency >= octaveCutoffs[octave]) {
+
+            octave++;
+            multiplier *= 2;
+        }
+        octave--;
+        multiplier /= 2;
+        var i = 0;
+        while (i < noteFrequencies.length &&
+            this.state.frequency > noteFrequencies[i] * multiplier) {
+
+            i++;
+        }
+        if (i === 0) {
+            return {
+                note: notes[0],
+                octave: octave,
+                difference: this.state.frequency -
+                    noteFrequencies[0] * multiplier
+            };
+        } else if(i === noteFrequencies.length) {
+            return {
+                note: notes[notes.length - 1],
+                octave: octave,
+                difference: this.state.frequency -
+                    noteFrequencies[noteFrequencies.length - 1] * multiplier
+            };
+        } else {
+            var toLower = this.state.frequency -
+                noteFrequencies[i - 1] * multiplier;
+            var toHigher = this.state.frequency -
+                noteFrequencies[i] * multiplier;
+            if (toLower < -toHigher) {
+                return {
+                    note: notes[i - 1],
+                    octave: octave,
+                    difference: toLower
+                };
+            } else {
+                return {
+                    note: notes[i],
+                    octave: octave,
+                    difference: toHigher
+                };
+            }
+        }
     },
     render: function() {
-    	var note = this.getNote();
-    	return (
-    		React.createElement("div", {style: getBackgroundColor(note.difference), className: "full relative"}, 
-    			React.createElement(Frequency, {frequency: this.state.frequency.toFixed(3)}), 
-    			React.createElement(Difference, {difference: note.difference}), 
-    			React.createElement(Note, {note: note.note, octave: note.octave})
-    		)
-    	);
+        var note = this.getNote();
+        return (
+            React.createElement("div", {style: getBackgroundColor(note.difference), 
+                className: "full relative"}, 
+
+                React.createElement(Frequency, {frequency: this.state.frequency.toFixed(3)}), 
+                React.createElement(Difference, {difference: note.difference}), 
+                React.createElement(Note, {note: note.note, octave: note.octave})
+            )
+        );
     }
 });
 
 
 },{"./difference.js":1,"./frequency.js":2,"./helpers.js":3,"./mpm.js":5,"./note.js":6,"./webaudio.js":8,"react":164}],8:[function(require,module,exports){
 window.AudioContext = window.AudioContext ||
-					  window.webkitAudioContext ||
-					  window.mozAudioContext ||
-					  window.oAudioContext ||
-					  window.msAudioContext;
+                      window.webkitAudioContext ||
+                      window.mozAudioContext ||
+                      window.oAudioContext ||
+                      window.msAudioContext;
 
 navigator.getUserMedia = navigator.getUserMedia ||
-					  	 navigator.webkitGetUserMedia ||
-					     navigator.mozGetUserMedia ||
-					     navigator.msGetUserMedia;
+                         navigator.webkitGetUserMedia ||
+                         navigator.mozGetUserMedia ||
+                         navigator.msGetUserMedia;
 
 function chainConnect() {
-	for(var i = 0; i < arguments.length - 1; i++) {
-		arguments[i].connect(arguments[i+1]);
-	}
+    for(var i = 0; i < arguments.length - 1; i++) {
+        arguments[i].connect(arguments[i+1]);
+    }
 }
 
 module.exports = function(stream) {
-	var context = new AudioContext();
-	var mic = context.createMediaStreamSource(stream);
-	var script = context.createScriptProcessor(1024, 1, 1);
-	var gain = context.createGain();
-	gain.gain.value = 0;
-	chainConnect(mic, script, gain, context.destination);
-	return {
-		context: context,
-		script: script
-	};
+    var context = new AudioContext();
+    var mic = context.createMediaStreamSource(stream);
+    var script = context.createScriptProcessor(1024, 1, 1);
+    var gain = context.createGain();
+    gain.gain.value = 0;
+    chainConnect(mic, script, gain, context.destination);
+    return {
+        context: context,
+        script: script
+    };
 };
 
 
@@ -1036,7 +1056,9 @@ var isUnitlessNumber = {
   columnCount: true,
   flex: true,
   flexGrow: true,
+  flexPositive: true,
   flexShrink: true,
+  flexNegative: true,
   fontWeight: true,
   lineClamp: true,
   lineHeight: true,
@@ -1049,7 +1071,9 @@ var isUnitlessNumber = {
 
   // SVG-related properties
   fillOpacity: true,
-  strokeOpacity: true
+  strokeDashoffset: true,
+  strokeOpacity: true,
+  strokeWidth: true
 };
 
 /**
@@ -4136,6 +4160,7 @@ var HTMLDOMPropertyConfig = {
     headers: null,
     height: MUST_USE_ATTRIBUTE,
     hidden: MUST_USE_ATTRIBUTE | HAS_BOOLEAN_VALUE,
+    high: null,
     href: null,
     hrefLang: null,
     htmlFor: null,
@@ -4146,6 +4171,7 @@ var HTMLDOMPropertyConfig = {
     lang: null,
     list: MUST_USE_ATTRIBUTE,
     loop: MUST_USE_PROPERTY | HAS_BOOLEAN_VALUE,
+    low: null,
     manifest: MUST_USE_ATTRIBUTE,
     marginHeight: null,
     marginWidth: null,
@@ -4160,6 +4186,7 @@ var HTMLDOMPropertyConfig = {
     name: null,
     noValidate: HAS_BOOLEAN_VALUE,
     open: HAS_BOOLEAN_VALUE,
+    optimum: null,
     pattern: null,
     placeholder: null,
     poster: null,
@@ -4173,6 +4200,7 @@ var HTMLDOMPropertyConfig = {
     rowSpan: null,
     sandbox: null,
     scope: null,
+    scoped: HAS_BOOLEAN_VALUE,
     scrolling: null,
     seamless: MUST_USE_ATTRIBUTE | HAS_BOOLEAN_VALUE,
     selected: MUST_USE_PROPERTY | HAS_BOOLEAN_VALUE,
@@ -4214,7 +4242,9 @@ var HTMLDOMPropertyConfig = {
     itemID: MUST_USE_ATTRIBUTE,
     itemRef: MUST_USE_ATTRIBUTE,
     // property is supported for OpenGraph in meta tags.
-    property: null
+    property: null,
+    // IE-only attribute that controls focus behavior
+    unselectable: MUST_USE_ATTRIBUTE
   },
   DOMAttributeNames: {
     acceptCharset: 'accept-charset',
@@ -4789,7 +4819,7 @@ if ("production" !== process.env.NODE_ENV) {
       if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ === 'undefined') {
         console.debug(
           'Download the React DevTools for a better development experience: ' +
-          'http://fb.me/react-devtools'
+          'https://fb.me/react-devtools'
         );
       }
     }
@@ -4816,7 +4846,7 @@ if ("production" !== process.env.NODE_ENV) {
       if (!expectedFeatures[i]) {
         console.error(
           'One or more ES5 shim/shams expected by React are not available: ' +
-          'http://fb.me/react-warning-polyfills'
+          'https://fb.me/react-warning-polyfills'
         );
         break;
       }
@@ -4824,7 +4854,7 @@ if ("production" !== process.env.NODE_ENV) {
   }
 }
 
-React.version = '0.13.1';
+React.version = '0.13.3';
 
 module.exports = React;
 
@@ -6331,7 +6361,7 @@ var ReactClass = {
         ("production" !== process.env.NODE_ENV ? warning(
           this instanceof Constructor,
           'Something is calling a React component directly. Use a factory or ' +
-          'JSX instead. See: http://fb.me/react-legacyfactory'
+          'JSX instead. See: https://fb.me/react-legacyfactory'
         ) : null);
       }
 
@@ -6543,20 +6573,38 @@ ReactComponent.prototype.forceUpdate = function(callback) {
  */
 if ("production" !== process.env.NODE_ENV) {
   var deprecatedAPIs = {
-    getDOMNode: 'getDOMNode',
-    isMounted: 'isMounted',
-    replaceProps: 'replaceProps',
-    replaceState: 'replaceState',
-    setProps: 'setProps'
+    getDOMNode: [
+      'getDOMNode',
+      'Use React.findDOMNode(component) instead.'
+    ],
+    isMounted: [
+      'isMounted',
+      'Instead, make sure to clean up subscriptions and pending requests in ' +
+      'componentWillUnmount to prevent memory leaks.'
+    ],
+    replaceProps: [
+      'replaceProps',
+      'Instead, call React.render again at the top level.'
+    ],
+    replaceState: [
+      'replaceState',
+      'Refactor your code to use setState instead (see ' +
+      'https://github.com/facebook/react/issues/3236).'
+    ],
+    setProps: [
+      'setProps',
+      'Instead, call React.render again at the top level.'
+    ]
   };
-  var defineDeprecationWarning = function(methodName, displayName) {
+  var defineDeprecationWarning = function(methodName, info) {
     try {
       Object.defineProperty(ReactComponent.prototype, methodName, {
         get: function() {
           ("production" !== process.env.NODE_ENV ? warning(
             false,
-            '%s(...) is deprecated in plain JavaScript React classes.',
-            displayName
+            '%s(...) is deprecated in plain JavaScript React classes. %s',
+            info[0],
+            info[1]
           ) : null);
           return undefined;
         }
@@ -6862,6 +6910,14 @@ var ReactCompositeComponentMixin = {
         this.getName() || 'a component'
       ) : null);
       ("production" !== process.env.NODE_ENV ? warning(
+        !inst.getDefaultProps ||
+        inst.getDefaultProps.isReactClassApproved,
+        'getDefaultProps was defined on %s, a plain JavaScript class. ' +
+        'This is only supported for classes created using React.createClass. ' +
+        'Use a static property to define defaultProps instead.',
+        this.getName() || 'a component'
+      ) : null);
+      ("production" !== process.env.NODE_ENV ? warning(
         !inst.propTypes,
         'propTypes was defined as an instance property on %s. Use a static ' +
         'property to define propTypes instead.',
@@ -6897,6 +6953,7 @@ var ReactCompositeComponentMixin = {
     this._pendingReplaceState = false;
     this._pendingForceUpdate = false;
 
+    var childContext;
     var renderedElement;
 
     var previouslyMounting = ReactLifeCycle.currentlyMountingInstance;
@@ -6911,7 +6968,8 @@ var ReactCompositeComponentMixin = {
         }
       }
 
-      renderedElement = this._renderValidatedComponent();
+      childContext = this._getValidatedChildContext(context);
+      renderedElement = this._renderValidatedComponent(childContext);
     } finally {
       ReactLifeCycle.currentlyMountingInstance = previouslyMounting;
     }
@@ -6925,7 +6983,7 @@ var ReactCompositeComponentMixin = {
       this._renderedComponent,
       rootID,
       transaction,
-      this._processChildContext(context)
+      this._mergeChildContext(context, childContext)
     );
     if (inst.componentDidMount) {
       transaction.getReactMountReady().enqueue(inst.componentDidMount, inst);
@@ -7055,7 +7113,7 @@ var ReactCompositeComponentMixin = {
    * @return {object}
    * @private
    */
-  _processChildContext: function(currentContext) {
+  _getValidatedChildContext: function(currentContext) {
     var inst = this._instance;
     var childContext = inst.getChildContext && inst.getChildContext();
     if (childContext) {
@@ -7080,6 +7138,13 @@ var ReactCompositeComponentMixin = {
           name
         ) : invariant(name in inst.constructor.childContextTypes));
       }
+      return childContext;
+    }
+    return null;
+  },
+
+  _mergeChildContext: function(currentContext, childContext) {
+    if (childContext) {
       return assign({}, currentContext, childContext);
     }
     return currentContext;
@@ -7339,6 +7404,10 @@ var ReactCompositeComponentMixin = {
       return inst.state;
     }
 
+    if (replace && queue.length === 1) {
+      return queue[0];
+    }
+
     var nextState = assign({}, replace ? queue[0] : inst.state);
     for (var i = replace ? 1 : 0; i < queue.length; i++) {
       var partial = queue[i];
@@ -7408,13 +7477,14 @@ var ReactCompositeComponentMixin = {
   _updateRenderedComponent: function(transaction, context) {
     var prevComponentInstance = this._renderedComponent;
     var prevRenderedElement = prevComponentInstance._currentElement;
-    var nextRenderedElement = this._renderValidatedComponent();
+    var childContext = this._getValidatedChildContext();
+    var nextRenderedElement = this._renderValidatedComponent(childContext);
     if (shouldUpdateReactComponent(prevRenderedElement, nextRenderedElement)) {
       ReactReconciler.receiveComponent(
         prevComponentInstance,
         nextRenderedElement,
         transaction,
-        this._processChildContext(context)
+        this._mergeChildContext(context, childContext)
       );
     } else {
       // These two IDs are actually the same! But nothing should rely on that.
@@ -7430,7 +7500,7 @@ var ReactCompositeComponentMixin = {
         this._renderedComponent,
         thisID,
         transaction,
-        context
+        this._mergeChildContext(context, childContext)
       );
       this._replaceNodeWithMarkupByID(prevComponentID, nextMarkup);
     }
@@ -7468,11 +7538,12 @@ var ReactCompositeComponentMixin = {
   /**
    * @private
    */
-  _renderValidatedComponent: function() {
+  _renderValidatedComponent: function(childContext) {
     var renderedComponent;
     var previousContext = ReactContext.current;
-    ReactContext.current = this._processChildContext(
-      this._currentElement._context
+    ReactContext.current = this._mergeChildContext(
+      this._currentElement._context,
+      childContext
     );
     ReactCurrentOwner.current = this;
     try {
@@ -7841,6 +7912,7 @@ var ReactDOM = mapObject({
 
   // SVG
   circle: 'circle',
+  clipPath: 'clipPath',
   defs: 'defs',
   ellipse: 'ellipse',
   g: 'g',
@@ -7992,11 +8064,13 @@ function assertValidProps(props) {
       'Can only set one of `children` or `props.dangerouslySetInnerHTML`.'
     ) : invariant(props.children == null));
     ("production" !== process.env.NODE_ENV ? invariant(
-      props.dangerouslySetInnerHTML.__html != null,
+      typeof props.dangerouslySetInnerHTML === 'object' &&
+      '__html' in props.dangerouslySetInnerHTML,
       '`props.dangerouslySetInnerHTML` must be in the form `{__html: ...}`. ' +
-      'Please visit http://fb.me/react-invariant-dangerously-set-inner-html ' +
+      'Please visit https://fb.me/react-invariant-dangerously-set-inner-html ' +
       'for more information.'
-    ) : invariant(props.dangerouslySetInnerHTML.__html != null));
+    ) : invariant(typeof props.dangerouslySetInnerHTML === 'object' &&
+    '__html' in props.dangerouslySetInnerHTML));
   }
   if ("production" !== process.env.NODE_ENV) {
     ("production" !== process.env.NODE_ENV ? warning(
@@ -8304,6 +8378,8 @@ ReactDOMComponent.Mixin = {
       if (propKey === STYLE) {
         if (nextProp) {
           nextProp = this._previousStyleCopy = assign({}, nextProp);
+        } else {
+          this._previousStyleCopy = null;
         }
         if (lastProp) {
           // Unset styles on `lastProp` but not on `nextProp`.
@@ -10800,7 +10876,7 @@ function warnAndMonitorForKeyUse(message, element, parentType) {
 
   ("production" !== process.env.NODE_ENV ? warning(
     false,
-    message + '%s%s See http://fb.me/react-warning-keys for more information.',
+    message + '%s%s See https://fb.me/react-warning-keys for more information.',
     parentOrOwnerAddendum,
     childOwnerAddendum
   ) : null);
@@ -10924,9 +11000,9 @@ function warnForPropsMutation(propName, element) {
 
   ("production" !== process.env.NODE_ENV ? warning(
     false,
-    'Don\'t set .props.%s of the React component%s. ' +
-    'Instead, specify the correct value when ' +
-    'initially creating the element.%s',
+    'Don\'t set .props.%s of the React component%s. Instead, specify the ' +
+    'correct value when initially creating the element or use ' +
+    'React.cloneElement to make a new element with updated props.%s',
     propName,
     elementInfo,
     ownerInfo
@@ -15621,6 +15697,7 @@ var MUST_USE_ATTRIBUTE = DOMProperty.injection.MUST_USE_ATTRIBUTE;
 
 var SVGDOMPropertyConfig = {
   Properties: {
+    clipPath: MUST_USE_ATTRIBUTE,
     cx: MUST_USE_ATTRIBUTE,
     cy: MUST_USE_ATTRIBUTE,
     d: MUST_USE_ATTRIBUTE,
@@ -15666,6 +15743,7 @@ var SVGDOMPropertyConfig = {
     y: MUST_USE_ATTRIBUTE
   },
   DOMAttributeNames: {
+    clipPath: 'clip-path',
     fillOpacity: 'fill-opacity',
     fontFamily: 'font-family',
     fontSize: 'font-size',
@@ -18478,6 +18556,7 @@ var shouldWrap = {
   // Force wrapping for SVG elements because if they get created inside a <div>,
   // they will be initialized in the wrong namespace (and will not display).
   'circle': true,
+  'clipPath': true,
   'defs': true,
   'ellipse': true,
   'g': true,
@@ -18520,6 +18599,7 @@ var markupWrap = {
   'th': trWrap,
 
   'circle': svgWrap,
+  'clipPath': svgWrap,
   'defs': svgWrap,
   'ellipse': svgWrap,
   'g': svgWrap,
@@ -18867,6 +18947,7 @@ assign(
 function isInternalComponentType(type) {
   return (
     typeof type === 'function' &&
+    typeof type.prototype !== 'undefined' &&
     typeof type.prototype.mountComponent === 'function' &&
     typeof type.prototype.receiveComponent === 'function'
   );
