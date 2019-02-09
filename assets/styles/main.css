@@ -21,6 +21,12 @@ body {
     -webkit-transform: translate(-50%, -50%);
 }
 
+.bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
 .full {
     height: 100%;
     width: 100%;
@@ -49,6 +55,36 @@ h2, small {
 .withMargin {
     margin: 20px;
 }
+
+.horizontalList {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.horizontalItem {
+    display: block;
+    flex: 0 1 auto;
+    list-style-type: none;
+}
+
+.clickableItem {
+    font-weight: normal;
+    cursor: pointer;
+    font-style: normal;
+}
+
+.clickableItem:hover {
+  font-style: italic;
+}
+
+.clickedItem {
+  font-weight: bold;
+}
+
 
 @media only screen and (max-width: 750px) {
     h2 {

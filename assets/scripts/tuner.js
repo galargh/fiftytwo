@@ -1,9 +1,10 @@
 /** @jsx React.DOM */
-var React      = require('react'),
-    Frequency  = require('./frequency.js'),
-    Note       = require('./note.js'),
-    Difference = require('./difference.js'),
-    Help       = require('./helpers.js');
+var React         = require('react'),
+    Frequency     = require('./frequency.js'),
+    Note          = require('./note.js'),
+    Difference    = require('./difference.js'),
+    Transposition = require('./transposition.js'),
+    Help          = require('./helpers.js');
 
 var setUpStream   = require('./webaudio.js'),
     estimatePitch = require('./mpm.js');
@@ -19,7 +20,8 @@ var script;
 module.exports = React.createClass({
     getInitialState: function() {
         return {
-            frequency: 0
+            frequency: 0,
+            transposition: 0
         };
     },
     componentDidMount: function() {
@@ -49,6 +51,14 @@ module.exports = React.createClass({
             pitches = [];
         }
     },
+    setTransposition: function(transposition) {
+        this.setState({
+          transposition: transposition
+        });
+    },
+    getTransposedNote: function(i) {
+      return notes[(this.state.transposition + i) % notes.length];
+    },
     getNote: function() {
         var multiplier = 1;
         var octave = 0;
@@ -68,14 +78,14 @@ module.exports = React.createClass({
         }
         if (i === 0) {
             return {
-                note: notes[0],
+                note: this.getTransposedNote(0),
                 octave: octave,
                 difference: this.state.frequency -
                     noteFrequencies[0] * multiplier
             };
         } else if(i === noteFrequencies.length) {
             return {
-                note: notes[notes.length - 1],
+                note: this.getTransposedNote(notes.length - 1),
                 octave: octave,
                 difference: this.state.frequency -
                     noteFrequencies[noteFrequencies.length - 1] * multiplier
@@ -87,13 +97,13 @@ module.exports = React.createClass({
                 noteFrequencies[i] * multiplier;
             if (toLower < -toHigher) {
                 return {
-                    note: notes[i - 1],
+                    note: this.getTransposedNote(i - 1),
                     octave: octave,
                     difference: toLower
                 };
             } else {
                 return {
-                    note: notes[i],
+                    note: this.getTransposedNote(i),
                     octave: octave,
                     difference: toHigher
                 };
@@ -109,6 +119,7 @@ module.exports = React.createClass({
                 <Frequency frequency={this.state.frequency.toFixed(3)} />
                 <Difference difference={note.difference} />
                 <Note note={note.note} octave={note.octave} />
+                <Transposition notes={notes} transposition={this.state.transposition} transpose={this.setTransposition} />
             </div>
         );
     }
