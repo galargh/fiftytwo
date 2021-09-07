@@ -1,7 +1,8 @@
 /** @jsx React.DOM */
-var React = require('react');
+var React = require('react'),
+    createClass = require('create-react-class');
 
-module.exports = React.createClass({
+module.exports = createClass({
     render: function() {
         var difference = this.props.difference.toFixed(3);
         if (difference > 0) {

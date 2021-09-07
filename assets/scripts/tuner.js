@@ -6,7 +6,8 @@ var React         = require('react'),
     Transposition = require('./transposition.js'),
     Help          = require('./helpers.js');
 
-var setUpStream   = require('./webaudio.js'),
+var createClass   = require('create-react-class'),
+    setUpStream   = require('./webaudio.js'),
     estimatePitch = require('./mpm.js');
 
 var octaveCutoffs = Help.octaveCutoffs,
@@ -17,7 +18,7 @@ var octaveCutoffs = Help.octaveCutoffs,
 var pitches = [];
 var script;
 
-module.exports = React.createClass({
+module.exports = createClass({
     getInitialState: function() {
         return {
             frequency: 0,

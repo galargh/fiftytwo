@@ -14,11 +14,13 @@
   "author": "Piotr Galar",
   "license": "MIT",
   "dependencies": {
-    "react": "^0.13.1"
+    "create-react-class": "^15.7.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "browserify": "^9.0.3",
-    "http-server": "^0.8.0",
-    "reactify": "^1.1.0"
+    "browserify": "^17.0.0",
+    "http-server": "^13.0.1",
+    "reactify": "^1.1.1"
   }
 }
